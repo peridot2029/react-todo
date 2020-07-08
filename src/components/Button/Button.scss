@@ -1,0 +1,21 @@
+@charset "utf-8";
+
+button,
+.button {
+  font-size: 18px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  text-transform: capitalize;
+  background: none;
+  cursor: pointer;
+
+  &.add-button {
+    float: right;
+    width: 50px;
+    height: 40px;
+    line-height: 40px;
+    text-align: right;
+  }
+}

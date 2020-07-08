@@ -1,0 +1,42 @@
+@charset "utf-8";
+
+body {
+  overflow: scroll;
+  background-color: #f5f3e9;
+
+  section {
+    width: 450px;
+    margin: 100px auto;
+    padding: 20px 20px;
+    border-radius: 5px;
+    background-color: #98c0b7;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-transform: uppercase;
+  }
+
+  h1 {
+    font-size: 30px;
+    text-align: center;
+  }
+
+  h2 {
+    font-size: 22px;
+    margin-top: 10px;
+    border-bottom: 3px solid #333;
+  }
+
+  .add-form {
+    margin-top: 10px;
+  }
+
+  .error .message {
+    display: block;
+    margin-top: 10px;
+    font-size: 16px;
+    color: red;
+  }
+}

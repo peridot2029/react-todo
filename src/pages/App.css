@@ -1,0 +1,70 @@
+@charset "utf-8";
+
+/* margin, padding */
+body,
+main,
+div,
+span,
+input,
+label,
+button,
+form,
+ul,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+b,
+i,
+p,
+form {
+  margin: 0;
+  padding: 0;
+}
+
+/* list */
+ol,
+ul,
+dl,
+li,
+dt {
+  list-style: none;
+}
+
+/* title */
+h1,
+h2,
+h3,
+h4,
+h5 {
+  color: #222;
+  font-weight: normal;
+}
+
+b,
+strong,
+i {
+  font-style: normal;
+}
+
+body,
+input,
+label,
+p,
+ul,
+li,
+ol,
+span,
+div,
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #222;
+}
