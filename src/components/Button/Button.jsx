@@ -1,15 +1,20 @@
-import React from "react";
-import PropTypes, { oneOf, element, string, func } from "prop-types";
+import React, { useState } from "react";
+import PropTypes, { element, string, func } from "prop-types";
 import classNames from "classnames";
 import "./Button.scss";
-const Button = (props) => {
-  const { type, className, name, onClick, children } = props;
+const Button = ({ type, name, children, onClick }) => {
+  const [isClicked, setClicked] = useState(false);
+
   const buttonClass = classNames("button", name && `${name}-button`);
 
-  const handleClick = () => {};
-  console.group("%c ----- BUTTON COMPONENT ------", `color : #00FF66`);
-  console.log(`buttonClass : ${buttonClass}`);
-  console.groupEnd("%c ----- BUTTON COMPONENT ------", `color : #00FF66`);
+  const handleClick = () => {
+    setClicked(true);
+
+    if (onClick) {
+      onClick(isClicked);
+    }
+  };
+
   return (
     <button type={type} className={buttonClass} onClick={handleClick}>
       {children || name}
@@ -18,7 +23,7 @@ const Button = (props) => {
 };
 
 Button.propTypes = {
-  type: PropTypes.oneOf(["button", "submit", "reset", null]),
+  type: string.isRequired,
   children: PropTypes.oneOfType([element, string]),
   onClick: func,
 };

@@ -12,10 +12,9 @@ button,
   cursor: pointer;
 
   &.add-button {
-    float: right;
+    align-self: flex-end;
     width: 50px;
     height: 40px;
     line-height: 40px;
-    text-align: right;
   }
 }

@@ -1,10 +1,9 @@
 .checkbox {
-  @at-root .todo li input[type="checkbox"] {
-    float: left;
-    width: 20px;
-    height: 20px;
-    margin: 8px 10px 0 0;
-    border-radius: 3px;
-    cursor: pointer;
-  }
+  display: inherit;
+  order: -2;
+  width: 20px;
+  height: 20px;
+  margin: 3px 10px 0 0;
+  border-radius: 3px;
+  cursor: pointer;
 }

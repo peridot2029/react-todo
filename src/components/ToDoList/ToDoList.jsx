@@ -1,42 +1,43 @@
 import React, { useState } from "react";
+import uuid from "uuid/dist/v1";
+import Form from "../Form/Form";
 import ToDoItem from "../ToDoItem/ToDoItem";
-import Input from "../Input/Input";
-import Button from "../Button/Button";
+import ToDoListContext from "../ToDoListContext/ToDoList.context";
 import "./ToDoList.scss";
 
 const ToDoList = () => {
   const [todoData, setToDoData] = useState([
-    { id: 1, title: "testOne", isCompleted: false },
-    { id: 2, title: "testTwo", isCompleted: false },
+    { id: 1, content: "test One", isCompleted: false },
   ]);
 
+  const addToDoItem = (content) => {
+    setToDoData([...todoData, { id: uuid(), content, isCompleted: false }]);
+  };
+
   return (
-    <main>
-      <section>
-        <h1>todo list</h1>
-        <div>
-          <h2>add item</h2>
-          <form className="add-form">
-            <div>
-              <Input type="text" id="addInput">
-                {" "}
-                할 일 추가
-              </Input>
-              <Button type="submit" name="add" />
-            </div>
-            <p className="error"></p>
-          </form>
-        </div>
-        <div className="todo">
-          <h2>todo</h2>
-          <ul className="incomplete">
-            {todoData.map((item) => (
-              <>{!item.isCompleted && <ToDoItem item={item} />}</>
-            ))}
-          </ul>
-        </div>
-      </section>
-    </main>
+    <ToDoListContext.Provider value={[todoData, setToDoData]}>
+      <main>
+        <section>
+          <h1>todo list</h1>
+          <div>
+            <h2>add item</h2>
+            <Form addToDoItem={addToDoItem} />
+          </div>
+          <div className="todo">
+            <h2>todo</h2>
+            <ul className="incomplete">
+              {todoData.map(
+                (item) =>
+                  !item.isCompleted && <ToDoItem key={item.id} item={item} />
+              )}
+            </ul>
+          </div>
+          <div className="todo">
+            <h2>completed</h2>
+          </div>
+        </section>
+      </main>
+    </ToDoListContext.Provider>
   );
 };
 export default ToDoList;

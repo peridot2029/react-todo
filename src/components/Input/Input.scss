@@ -1,35 +1,25 @@
 @charset "utf-8";
 
-input,
-.input {
-  border: 0;
-  background-color: #fff;
-
-  @at-root .add-form input[type="text"] {
-    float: left;
-    width: calc(100% - 50px);
-    height: 40px;
-    border-radius: 3px;
-    font-size: 20px;
-  }
-
-  @at-root .add-form > div::after {
-    display: table;
-    clear: both;
-    content: "";
-  }
-}
-
 .lable {
-  background: none;
+  width: 100%;
+  margin-right: 20px;
 
-  &.a11y-hidden {
-    overflow: hidden;
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    clip: rect(0 0 0 0);
-    clip: rect(0, 0, 0, 0);
+  input,
+  .input {
+    border: 0;
+    background-color: #fff;
+
+
+    &.input-add {
+      width: inherit;
+      height: 40px;
+      padding-left: 3px;
+      border-radius: 3px;
+      font-size: 20px;
+    }
+
+    &.input-add:focus {
+      outline: 0;
+    }
   }
 }
