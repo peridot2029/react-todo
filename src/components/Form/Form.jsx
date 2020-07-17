@@ -2,16 +2,19 @@ import React, { useState } from "react";
 import Input from "../Input/Input";
 import Button from "./../Button/Button";
 import "./Form.scss";
+import Error from "./../Error/Error";
 
 const Form = ({ addToDoItem }) => {
   const [content, setContent] = useState("");
-  // 추가 input 값 비워주기, 오류개선
+  const [errorValue, setErrorValue] = useState(false);
+
   const handleSumit = (e) => {
     e.preventDefault();
-
     if (content === "") {
+      setErrorValue(true);
     } else {
       addToDoItem(content);
+      setErrorValue(false);
       setContent("");
     }
   };
@@ -22,8 +25,11 @@ const Form = ({ addToDoItem }) => {
 
   return (
     <form className="add-form" onSubmit={handleSumit}>
-      <Input className="add" onChange={handleAddInput} />
-      <Button type="submit" name="add" />
+      <div>
+        <Input className="add" onChange={handleAddInput} />
+        <Button type="submit" name="add" />
+      </div>
+      <Error className={errorValue ? "is-error" : "error"} />
     </form>
   );
 };

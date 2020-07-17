@@ -1,0 +1,7 @@
+.is-error::before {
+  content: "내용을 입력해주세요.";
+  margin-top: -6px;
+  font-size: 16px;
+  font-weight: 600;
+  color: red;
+}
