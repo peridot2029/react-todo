@@ -2,14 +2,15 @@
 
 body {
   overflow: scroll;
-  background-color: #f5f3e9;
+  background-color: #003666;
+
 
   section {
     width: 450px;
     margin: 100px auto;
     padding: 20px 20px;
     border-radius: 5px;
-    background-color: #98c0b7;
+    background-color: #fff;
   }
 
   h1,
@@ -19,21 +20,13 @@ body {
   }
 
   h1 {
-    font-size: 30px;
+    font-size: 45px;
     text-align: center;
   }
 
   h2 {
-    font-size: 22px;
+    font-size: 25px;
     margin-top: 10px;
-    border-bottom: 3px solid #333;
-  }
-
-
-  .error .message {
-    display: block;
-    margin-top: 10px;
-    font-size: 16px;
-    color: red;
+    border-bottom: 2px solid #595959e3;
   }
 }

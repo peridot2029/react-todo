@@ -27,4 +27,5 @@ Button.propTypes = {
   children: PropTypes.oneOfType([element, string]),
   onClick: func,
 };
+
 export default Button;

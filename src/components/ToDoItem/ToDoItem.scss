@@ -2,40 +2,26 @@
 
     li {
       display: flex;
-      height: 37px;
-      line-height: 37px;
+      height: 40px;
+      line-height: 40px;
       margin: 10px 0;
-      border-bottom: 1px solid #eee;
+      border-bottom: 1px solid #595959;
+    }
 
-      label {
-        display: inherit;
-        order: -1;
-        box-sizing: border-box;
-        width: calc(100% - 125px);
+    .todo-btngroup {
+      box-sizing: border-box;
+      margin-left: 10px;
+      height: inherit;
+      line-height: inherit;
+
+      .button {
         height: inherit;
         line-height: inherit;
-        min-height: 37px;
-        font-size: 18px;
-        word-wrap: break-all;
-        text-transform: capitalize;
-
+        padding: 0 10px;
       }
 
-      .todo-btngroup {
-        box-sizing: border-box;
-        margin-left: 10px;
-        height: inherit;
-        line-height: inherit;
-
-        .button {
-          height: inherit;
-          line-height: inherit;
-          padding: 0 10px;
-        }
-
-        .delete-button {
-          padding: 0 0 0 10px;
-        }
+      .delete-button {
+        padding: 0 0 0 10px;
       }
     }
   }

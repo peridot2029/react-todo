@@ -1,21 +1,22 @@
 import React, { useState } from "react";
+import classNames from "classnames";
 import Input from "../Input/Input";
 import Button from "./../Button/Button";
-import "./Form.scss";
 import Error from "./../Error/Error";
+import "./Form.scss";
 
 const Form = ({ addToDoItem }) => {
   const [content, setContent] = useState("");
-  const [errorValue, setErrorValue] = useState(false);
+  const [error, setError] = useState(false);
 
-  const handleSumit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (content === "") {
-      setErrorValue(true);
+      setError(true);
     } else {
       addToDoItem(content);
-      setErrorValue(false);
       setContent("");
+      setError(false);
     }
   };
 
@@ -24,12 +25,12 @@ const Form = ({ addToDoItem }) => {
   };
 
   return (
-    <form className="add-form" onSubmit={handleSumit}>
+    <form className="add-form" onSubmit={handleSubmit}>
       <div>
         <Input className="add" onChange={handleAddInput} />
         <Button type="submit" name="add" />
       </div>
-      <Error className={errorValue ? "is-error" : "error"} />
+      <Error className={classNames("error", error && "is-error")} />
     </form>
   );
 };
