@@ -5,7 +5,8 @@ import "./Checkbox.scss";
 
 const Checkbox = ({ ...props }) => {
   const { item, onClick, edit } = props;
-  const [value, setValue] = useState("");
+  const { content, isCompleted } = item;
+  const [value, setValue] = useState(isCompleted);
 
   const checkboxClass = classNames("checkbox");
   const labelClass = classNames("label", edit && "a11y-hidden");
@@ -20,11 +21,11 @@ const Checkbox = ({ ...props }) => {
 
   return (
     <label className={labelClass}>
-      {!edit ? item.content : ""}
+      {!edit ? content : ""}
       <input
         type="checkbox"
         className={checkboxClass}
-        value={item.isCompleted}
+        value={value}
         onClick={handleClick}
       />
     </label>

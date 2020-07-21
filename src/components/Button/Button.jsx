@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PropTypes, { element, string, func } from "prop-types";
 import classNames from "classnames";
 import "./Button.scss";
+
 const Button = ({ type, name, children, onClick }) => {
   const [isClicked, setClicked] = useState(false);
 

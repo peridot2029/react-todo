@@ -1,53 +1,103 @@
 import React, { useContext, useState } from "react";
+import ToDoListContext from "../ToDoListContext/ToDoList.context";
 import Checkbox from "./../Checkbox/Checkbox";
 import Input from "../Input/Input";
 import Button from "../Button/Button";
-import ToDoListContext from "../ToDoListContext/ToDoList.context";
 import "./ToDoItem.scss";
 
 const ToDoItem = ({ item }) => {
-  const [todoData, setToDoData] = useContext(ToDoListContext);
+  // recycle variable
+  let index, list;
+
+  const [todoList, setTodoList] = useContext(ToDoListContext);
+
+  // edit input text state
   const [onInput, setOnInput] = useState(false);
+
+  // edit state
   const [edit, setEdit] = useState(false);
 
-  const handleEditClick = (value) => {
+  // todoList - findIndex, filter
+  const filterd = (todo) => todo.id === item.id;
+
+  // todoList - isCompleted :fasle, filter
+  const isComplteFilterd = (todo) => todo.id === item.id && !todo.isCompleted;
+
+  // todoList
+  const changeResultMap = (todo) => {
+    todo.isCompleted = !todo.isCompleted;
+    todo.date = new Date().toTimeString();
+    return todo;
+  };
+
+  // editItem - content value change
+  const resultMap = (value, item) => {
+    item.content = value;
+    return item;
+  };
+
+  // edit button click event
+  const handleEditClick = () => {
     setOnInput(true);
     setEdit(true);
-    editChange(value);
   };
 
-  const editChange = (value) => {
-    console.log(value);
+  // value - edit input text value
+  const editToDoItem = (value) => {
+    const editItem = todoList.filter(isComplteFilterd);
+    const editItemResult = editItem.map(resultMap.bind(item, value));
+    index = todoList.findIndex(filterd);
+    list = [...todoList];
+    list.splice(index, editItemResult);
+    setTodoList(list);
   };
-
+  // save button click event
+  const handleSaveClick = () => {
+    setOnInput(false);
+    setEdit(false);
+  };
+  // delete button click event
   const handleDeleteClick = () => {
-    const index = todoData.findIndex((todo) => todo.id === item.id);
-    const list = [...todoData];
+    index = todoList.findIndex(filterd);
+    list = [...todoList];
     list.splice(index, 1);
-    setToDoData(list);
+    setTodoList(list);
   };
 
-  const handleCheckToggle = (value) => {
-    if (value === "false") {
-    }
+  // checkbox value change event
+  const handleToggleClick = () => {
+    const changeItem = todoList.filter(isComplteFilterd);
+    const changeItemResult = changeItem.map(changeResultMap);
+    index = todoList.findIndex(filterd);
+    list = [...todoList];
+    list.splice(index, changeItem);
+    setTodoList(list);
   };
 
   return (
     <li>
       <Checkbox
         type="checkbox"
-        onClick={handleCheckToggle}
         item={!onInput && item}
         edit={edit}
+        onClick={handleToggleClick}
       />
-      {onInput && <Input item={item.content} onChange={editChange} />}
+
+      {onInput && (
+        <Input name="edit" value={item.content} onChange={editToDoItem} />
+      )}
       <div className="todo-btngroup">
-        <Button
-          type="button"
-          onClick={handleEditClick}
-          name={edit ? "save" : "edit"}
-        />
-        <Button type="button" onClick={handleDeleteClick} name="delete" />
+        {!edit && (
+          <Button
+            type="button"
+            name="edit"
+            eidt={edit}
+            onClick={handleEditClick}
+          />
+        )}
+        {edit && <Button type="submit" name="save" onClick={handleSaveClick} />}
+
+        <Button type="button" name="delete" onClick={handleDeleteClick} />
       </div>
     </li>
   );

@@ -1,33 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import classNames from "classnames";
 import "./Input.scss";
 
-const Input = ({ className, item, ...props }) => {
-  const [value, setValue] = useState("");
-  const [content, setContent] = useState("");
+const Input = ({ name, value, ...props }) => {
+  const inputClass = classNames("input", name && `input-${name}`);
 
-  const inputClass = classNames(
-    "input",
-    className && `input-${className}`,
-    item && "input-edit"
-  );
-
-  const labelClass = classNames(
-    "label",
-    className === "add" && `label-${className}`,
-    item && "label-edit"
-  );
+  const labelClass = classNames("label", name && `label-${name}`);
 
   const handleChange = (e) => {
-    setValue(e.target.value);
-
-    const { onChange, editChange } = props;
-    console.log(editChange);
+    const { onChange } = props;
 
     if (onChange) {
       onChange(e.target.value);
-    } else if (editChange) {
-      console.log("!");
     }
   };
 
@@ -36,7 +20,7 @@ const Input = ({ className, item, ...props }) => {
       <input
         type="text"
         className={inputClass}
-        value={value || item}
+        value={value}
         onChange={handleChange}
       />
     </label>

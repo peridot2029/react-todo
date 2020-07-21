@@ -1,7 +1,6 @@
 import React from "react";
 
 const ToDoListContext = {
-  todoData: [],
-  completedData: [],
+  todoList: [],
 };
 export default React.createContext(ToDoListContext);

@@ -1,36 +1,36 @@
 import React, { useState } from "react";
-import classNames from "classnames";
-import Input from "../Input/Input";
+import Input from "./../Input/Input";
 import Button from "./../Button/Button";
 import Error from "./../Error/Error";
 import "./Form.scss";
 
 const Form = ({ addToDoItem }) => {
-  const [content, setContent] = useState("");
+  const [value, setValue] = useState("");
   const [error, setError] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (content === "") {
+
+    if (value === "") {
       setError(true);
     } else {
-      addToDoItem(content);
-      setContent("");
+      addToDoItem(value);
       setError(false);
+      setValue("");
     }
   };
 
-  const handleAddInput = (value) => {
-    setContent(value);
+  const addToDoInput = (value) => {
+    setValue(value);
   };
 
   return (
     <form className="add-form" onSubmit={handleSubmit}>
       <div>
-        <Input className="add" onChange={handleAddInput} />
+        <Input name="add" value={value} onChange={addToDoInput} />
         <Button type="submit" name="add" />
       </div>
-      <Error className={classNames("error", error && "is-error")} />
+      <Error name={error} />
     </form>
   );
 };
