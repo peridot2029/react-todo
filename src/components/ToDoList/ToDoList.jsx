@@ -1,70 +1,71 @@
 import React, { useState, useEffect } from "react";
 import uuid from "uuid/dist/v1";
+import TodoListContext from "../TodoListContext/TodoList.context";
 import Form from "../Form/Form";
-import ToDoItem from "../ToDoItem/ToDoItem";
-import ToDoListContext from "../ToDoListContext/ToDoList.context";
-import "./ToDoList.scss";
+import TodoItem from "../TodoItem/TodoItem";
+import CompletedItem from "../TodoItem/CompletedItem";
+import "./TodoList.scss";
 
-const ToDoList = () => {
-  const loadedToDo = JSON.parse(localStorage.getItem("TODO")) || [];
+const TodoList = () => {
+  const loadTodoList = JSON.parse(localStorage.getItem("TODO")) || [];
 
-  const [todoList, setTodoList] = useState(loadedToDo);
+  const [todoList, setTodoList] = useState(loadTodoList);
 
-  const addToDoItem = (value) => {
+  const AddTodoDate = (value) => {
     setTodoList([
       ...todoList,
       {
         id: uuid(),
-        content: value,
+        text: value,
         isCompleted: false,
-        date: new Date().toTimeString(),
+        created: new Date(),
       },
     ]);
   };
 
-  // const todoListSort = (a, b) => {
-  //   let dateA = new Date(a["date"]).getTime();
-  //   let dateB = new Date(b["date"]).getTime();
-  //   return dateA < dateB ? 1 : -1;
-  // };
+  const TodoCreatedSort = (a, b) => {
+    return a["created"] < b["created"] ? 1 : -1;
+  };
 
-  // todoList.sort(todoListSort);
+  todoList.sort(TodoCreatedSort);
 
   useEffect(() => {
     localStorage.setItem("TODO", JSON.stringify(todoList));
   }, [todoList]);
 
   return (
-    <ToDoListContext.Provider value={[todoList, setTodoList]}>
+    <TodoListContext.Provider value={[todoList, setTodoList]}>
       <main>
         <section>
           <h1>todo list</h1>
           <div>
             <h2>add item</h2>
-            <Form addToDoItem={addToDoItem} />
+            <Form AddTodoDate={AddTodoDate} />
           </div>
           <div className="todo">
             <h2>todo</h2>
             <ul className="incomplete">
               {todoList.map(
-                (item) =>
-                  !item.isCompleted && <ToDoItem key={item.id} item={item} />
+                (date) =>
+                  !date.isCompleted && <TodoItem key={date.id} date={date} />
               )}
             </ul>
           </div>
 
           <div className="todo">
             <h2>completed</h2>
-            <ul className="completed">
+            {/* <ul className="completed">
               {todoList.map(
-                (item) =>
-                  item.isCompleted && <ToDoItem key={item.id} item={item} />
+                (date) =>
+                  date.isCompleted && (
+                    <CompletedItem key={date.id} date={date} />
+                  )
               )}
-            </ul>
+            </ul> */}
           </div>
         </section>
       </main>
-    </ToDoListContext.Provider>
+    </TodoListContext.Provider>
   );
 };
-export default ToDoList;
+export default TodoList;

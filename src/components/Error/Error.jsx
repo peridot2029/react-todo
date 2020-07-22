@@ -7,4 +7,5 @@ const Error = ({ name }) => {
 
   return <div className={ErrorClass} />;
 };
+
 export default Error;

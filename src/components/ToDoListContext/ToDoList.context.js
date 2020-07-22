@@ -1,6 +1,6 @@
 import React from "react";
 
-const ToDoListContext = {
+const TodoListContext = {
   todoList: [],
 };
-export default React.createContext(ToDoListContext);
+export default React.createContext(TodoListContext);

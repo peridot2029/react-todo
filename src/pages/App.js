@@ -1,9 +1,9 @@
 import React from "react";
 import "./App.css";
-import ToDoList from "./../components/ToDoList/ToDoList";
+import TodoList from "../components/TodoList/TodoList";
 
 function App() {
-  return <ToDoList />;
+  return <TodoList />;
 }
 
 export default App;

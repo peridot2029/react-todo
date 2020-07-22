@@ -4,7 +4,7 @@ import Button from "./../Button/Button";
 import Error from "./../Error/Error";
 import "./Form.scss";
 
-const Form = ({ addToDoItem }) => {
+const Form = ({ AddTodoDate }) => {
   const [value, setValue] = useState("");
   const [error, setError] = useState(false);
 
@@ -14,20 +14,20 @@ const Form = ({ addToDoItem }) => {
     if (value === "") {
       setError(true);
     } else {
-      addToDoItem(value);
+      AddTodoDate(value);
       setError(false);
       setValue("");
     }
   };
 
-  const addToDoInput = (value) => {
+  const handleChange = (value) => {
     setValue(value);
   };
 
   return (
     <form className="add-form" onSubmit={handleSubmit}>
       <div>
-        <Input name="add" value={value} onChange={addToDoInput} />
+        <Input type="text" name="add" value={value} onChange={handleChange} />
         <Button type="submit" name="add" />
       </div>
       <Error name={error} />
