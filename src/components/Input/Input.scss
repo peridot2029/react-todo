@@ -1,15 +1,17 @@
 @charset "utf-8";
 
 .input {
+  display: inherit;
   width: 100%;
   height: 40px;
   line-height: 40px;
   border-radius: 3px;
   font-size: 24px;
   background-color: #fff;
+  cursor: pointer;
 
   &.input-add {
-    padding-left: 3px;
+    width: calc(100% - 50px);
     border: 1px solid #726b6b;
   }
 
@@ -18,48 +20,39 @@
   }
 
   &.input-edit {
-    height: 35px;
-    line-height: 35px;
+    width: calc(100% - 140px);
+    height: 33px;
+    line-height: 33px;
     border: 1px solid #beb9b9;
   }
 
   &.input-checkbox {
     display: inherit;
-    order: -2;
+    order: -1;
     width: 20px;
     height: 20px;
     margin: 8px 10px 0 0;
     border-radius: 3px;
-    cursor: pointer;
   }
 }
 
 .label {
   display: inherit;
-  order: -2;
-  width: calc(100% - 112px);
-  height: inherit;
-  line-height: inherit;
+  width: calc(100% - 140px);
+  height: 37px;
+  line-height: 37px;
   min-height: 37px;
   font-size: 24px;
-  word-wrap: break-all;
   text-transform: capitalize;
 
-  // input (add, label)
-  &.label-add {
-    width: 100%;
-    margin-right: 20px;
-  }
 
-  // checkbox (edit, label)
   &.a11y-hidden {
-    display: inherit;
-    width: inherit;
-    height: inherit;
-  }
-
-  // input (edit, label)
-  &.label-edit {
-    width: calc(100% - 145px);
+    overflow: hidden;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    clip: rect(0 0 0 0);
+    clip: rect(0, 0, 0, 0);
   }
 }

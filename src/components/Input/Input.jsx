@@ -3,45 +3,53 @@ import { func, string } from "prop-types";
 import classNames from "classnames";
 import "./Input.scss";
 
-const Input = ({ name, type, value, onEdit, ...props }) => {
+const Input = ({ type, name, id, active, value, ...props }) => {
   const inputClass = classNames(
     "input",
-    type && `input-${type}`,
+    type.includes("checkbox") && `input-${type}`,
     name && `input-${name}`
   );
+
   const labelClass = classNames(
     "label",
-    name && `label-${name}`,
-    onEdit && "a11y-hidden"
+    name && "a11y-hidden",
+    active && "a11y-hidden"
   );
 
   const handleChange = (e) => {
     const { onChange } = props;
 
-    onChange && onChange(e.target.value);
+    if (onChange) {
+      onChange(e.target.value);
+    }
   };
 
   const handleClick = (e) => {
     const { onClick } = props;
-    onClick && onClick(e.target.value);
+    if (onClick) {
+      onClick(e.target.value);
+    }
   };
 
   return (
-    <label className={labelClass}>
+    <>
+      <label htmlFor={id} className={labelClass}>
+        {!active && value}
+      </label>
       <input
         type={type}
+        id={id}
         className={inputClass}
         value={value}
         onChange={handleChange}
         onClick={handleClick}
       />
-    </label>
+    </>
   );
 };
 
 Input.propTypes = {
-  type: string,
-  className: string,
+  type: string.isRequired,
   onChange: func,
   onClick: func,
 };

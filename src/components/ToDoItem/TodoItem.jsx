@@ -9,67 +9,55 @@ const TodoItem = ({ date }) => {
 
   const [todoList, setTodoList] = useContext(TodoListContext);
 
-  // edit input text state
-  const [onInput, setOnInput] = useState(false);
+  const [active, setActive] = useState(false);
 
-  // edit state
-  const [onEdit, setOnEdit] = useState(false);
-
-  const filterd = (item) => {
+  const itemMatchingID = (item) => {
     return item.id === date.id;
   };
 
-  const isComplteFilterd = (item) => {
+  const incompleteItem = (item) => {
     return item.id === date.id && !item.isCompleted;
   };
 
-  // isCompleted value change
-  const changeResultMap = (date) => {
+  const changeItemToCompleted = (date) => {
     date.isCompleted = !date.isCompleted;
     date.created = new Date();
     return date;
   };
 
-  // edit content value change
-  const resultMap = (value, date) => {
-    date.text = value;
+  const changeItemContent = (value, date) => {
+    date.content = value;
     return date;
   };
 
-  // edit button
   const handleEditClick = () => {
-    setOnInput(true);
-    setOnEdit(true);
+    setActive(true);
   };
-
-  // edit input text value
-  const editToDoItem = (value) => {
-    item = todoList.filter(isComplteFilterd);
-    result = item.map(resultMap.bind(date, value));
-    index = todoList.findIndex(filterd);
+  
+  const todoEditItem = (value) => {
+    item = todoList.filter(incompleteItem);
+    result = item.map(changeItemContent.bind(date, value));
+    index = todoList.findIndex(itemMatchingID);
     list = [...todoList];
     list.splice(index, result);
     setTodoList(list);
   };
 
-  // save button
   const handleSaveClick = () => {
-    setOnInput(false);
-    setOnEdit(false);
+    setActive(false);
   };
-  // delete button
+
   const handleDeleteClick = () => {
-    index = todoList.findIndex(filterd);
+    index = todoList.findIndex(itemMatchingID);
     list = [...todoList];
     list.splice(index, 1);
     setTodoList(list);
   };
 
-  // checkbox value change
   const handleCheckboxClick = () => {
-    item = todoList.filter(isComplteFilterd);
-    result = item.map(changeResultMap);
-    index = todoList.findIndex(filterd);
+    item = todoList.filter(incompleteItem);
+    result = item.map(changeItemToCompleted);
+    index = todoList.findIndex(itemMatchingID);
     list = [...todoList];
     list.splice(index, result);
     setTodoList(list);
@@ -79,24 +67,31 @@ const TodoItem = ({ date }) => {
     <li>
       <Input
         type="checkbox"
-        onEdit={onEdit}
-        value={date.text}
+        id={date.id}
+        value={date.content}
+        active={active}
         onClick={handleCheckboxClick}
       />
 
-      {onEdit && (
-        <Input name="edit" value={date.text} onChange={editToDoItem} />
+      {active && (
+        <Input
+          type="text"
+          id={date.id}
+          value={date.content}
+          name="edit"
+          onChange={todoEditItem}
+        />
       )}
       <div className="todo-btngroup">
-        {!onEdit && (
+        {!active && (
           <Button
             type="button"
             name="edit"
-            onEdit={onEdit}
+            active={active}
             onClick={handleEditClick}
           />
         )}
-        {onEdit && (
+        {active && (
           <Button type="submit" name="save" onClick={handleSaveClick} />
         )}
 

@@ -1,5 +1,4 @@
   .todo {
-
     li {
       display: flex;
       height: 40px;
@@ -8,21 +7,11 @@
       border-bottom: 1px solid #595959;
     }
 
-    .todo-btngroup,
-    .completed-btngroup {
-      box-sizing: border-box;
-      margin-left: 10px;
-      height: inherit;
-      line-height: inherit;
-
-      .button {
-        height: inherit;
-        line-height: inherit;
-        padding: 0 10px;
-      }
-
-      .delete-button {
-        padding: 0 0 0 10px;
-      }
+    .incomplete .todo-btngroup .delete-button {
+      margin: 0 0 0 8px;
     }
+  }
+
+  .completed .todo-btngroup .delete-button {
+    padding: 0 0 0 65px;
   }

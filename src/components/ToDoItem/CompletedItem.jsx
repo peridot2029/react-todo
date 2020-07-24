@@ -9,54 +9,46 @@ const CompletedItem = ({ date }) => {
 
   const [todoList, setTodoList] = useContext(TodoListContext);
 
-  const filterd = (item) => {
+  const itemMatchingID = (item) => {
     return item.id === date.id;
   };
 
-  const isComplteFilterd = (item) => {
+  const completedItem = (item) => {
     return item.id === date.id && item.isCompleted;
   };
 
-  // isCompleted value change
-  const changeResultMap = (todo) => {
-    todo.isCompleted = !todo.isCompleted;
-    todo.date = new Date();
-    return todo;
+  const changeItemToIncomplete = (date) => {
+    date.isCompleted = !date.isCompleted;
+    date.created = new Date();
+    return date;
   };
 
-  // delete button
   const handleDeleteClick = () => {
-    index = todoList.findIndex(filterd);
+    index = todoList.findIndex(itemMatchingID);
     list = [...todoList];
     list.splice(index, 1);
     setTodoList(list);
   };
 
-  // checkbox value change
   const handleCheckboxClick = () => {
-    item = todoList.filter(isComplteFilterd);
-    result = item.map(changeResultMap);
-    index = todoList.findIndex(filterd);
+    item = todoList.filter(completedItem);
+    result = item.map(changeItemToIncomplete);
+    index = todoList.findIndex(itemMatchingID);
     list = [...todoList];
     list.splice(index, result);
     setTodoList(list);
   };
-
-  const buttonStyle = {
-    paddingLeft: "65px",
-  };
-
+  
   return (
     <li>
-      <Input type="checkbox" value={date.text} onClick={handleCheckboxClick} />
+      <Input
+        type="checkbox"
+        id={date.id}
+        value={date.content}
+        onClick={handleCheckboxClick}
+      />
       <div className="todo-btngroup">
-        <Button
-          style={buttonStyle}
-          type="button"
-          name="delete"
-          value={date.isCompleted}
-          onClick={handleDeleteClick}
-        />
+        <Button type="button" name="delete" onClick={handleDeleteClick} />
       </div>
     </li>
   );

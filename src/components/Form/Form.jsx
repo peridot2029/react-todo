@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Input from "./../Input/Input";
 import Button from "./../Button/Button";
 import Error from "./../Error/Error";
 import "./Form.scss";
 
-const Form = ({ AddTodoDate }) => {
+const Form = ({ addTodoDate }) => {
   const [value, setValue] = useState("");
   const [error, setError] = useState(false);
 
@@ -14,7 +14,7 @@ const Form = ({ AddTodoDate }) => {
     if (value === "") {
       setError(true);
     } else {
-      AddTodoDate(value);
+      addTodoDate(value);
       setError(false);
       setValue("");
     }
@@ -23,6 +23,7 @@ const Form = ({ AddTodoDate }) => {
   const handleChange = (value) => {
     setValue(value);
   };
+
 
   return (
     <form className="add-form" onSubmit={handleSubmit}>

@@ -25,7 +25,7 @@ form {
   padding: 0;
 }
 
-/* list */
+
 ol,
 ul,
 dl,
@@ -34,21 +34,14 @@ dt {
   list-style: none;
 }
 
-/* title */
+
 h1,
 h2,
-h3,
-h4,
-h5 {
+h3 {
   color: #595959;
   font-weight: 600;
 }
 
-b,
-strong,
-i {
-  font-style: normal;
-}
 
 body,
 input,
@@ -62,9 +55,7 @@ span,
 div,
 h1,
 h2,
-h3,
-h4,
-h5 {
+h3 {
   font-family: 'Amatic SC', cursive;
   font-size: 12px;
   font-weight: 600;

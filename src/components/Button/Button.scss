@@ -2,22 +2,26 @@
 
 button,
 .button {
-  font-size: 24px;
-  color: #595959;
-  margin: 0;
-  padding: 0;
+  width: 50px;
+  height: 40px;
+  line-height: 40px;
   border: 0;
   outline: 0;
+  height: inherit;
+  line-height: inherit;
+  font-size: 24px;
+  color: #595959;
   text-transform: capitalize;
   background: none;
   cursor: pointer;
 
-  &.add-button,
-  &.save-button {
-    align-self: flex-end;
-    width: 50px;
-    height: 40px;
-    line-height: 40px;
+
+  &.add-button {
+    align-items: flex-end;
+    padding: 0 0 0 20px;
   }
 
+  &.save-button {
+    align-items: flex-end;
+  }
 }

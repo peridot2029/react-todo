@@ -11,24 +11,22 @@ const TodoList = () => {
 
   const [todoList, setTodoList] = useState(loadTodoList);
 
-  const AddTodoDate = (value) => {
+  const addTodoDate = (value) => {
     setTodoList([
       ...todoList,
       {
         id: uuid(),
-        text: value,
+        content: value,
         isCompleted: false,
         created: new Date(),
       },
     ]);
   };
 
-  const TodoCreatedSort = (a, b) => {
-    return a["created"] < b["created"] ? 1 : -1;
+  const todoCreatedSort = (dateA, dateB) => {
+    return dateA["created"] < dateB["created"] ? 1 : -1;
   };
-
-  todoList.sort(TodoCreatedSort);
-
+  todoList.sort(todoCreatedSort);
   useEffect(() => {
     localStorage.setItem("TODO", JSON.stringify(todoList));
   }, [todoList]);
@@ -40,8 +38,9 @@ const TodoList = () => {
           <h1>todo list</h1>
           <div>
             <h2>add item</h2>
-            <Form AddTodoDate={AddTodoDate} />
+            <Form addTodoDate={addTodoDate} />
           </div>
+
           <div className="todo">
             <h2>todo</h2>
             <ul className="incomplete">
@@ -54,14 +53,14 @@ const TodoList = () => {
 
           <div className="todo">
             <h2>completed</h2>
-            {/* <ul className="completed">
+            <ul className="completed">
               {todoList.map(
                 (date) =>
                   date.isCompleted && (
                     <CompletedItem key={date.id} date={date} />
                   )
               )}
-            </ul> */}
+            </ul>
           </div>
         </section>
       </main>
