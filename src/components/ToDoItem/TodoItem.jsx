@@ -33,7 +33,7 @@ const TodoItem = ({ date }) => {
   const handleEditClick = () => {
     setActive(true);
   };
-  
+
   const todoEditItem = (value) => {
     item = todoList.filter(incompleteItem);
     result = item.map(changeItemContent.bind(date, value));

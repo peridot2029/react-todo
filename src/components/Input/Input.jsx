@@ -12,7 +12,8 @@ const Input = ({ type, name, id, active, value, ...props }) => {
 
   const labelClass = classNames(
     "label",
-    name && "a11y-hidden",
+    type.includes("checkbox") && `label-${type}`,
+    name && `label-${name}`,
     active && "a11y-hidden"
   );
 
@@ -26,6 +27,7 @@ const Input = ({ type, name, id, active, value, ...props }) => {
 
   const handleClick = (e) => {
     const { onClick } = props;
+
     if (onClick) {
       onClick(e.target.value);
     }
@@ -33,9 +35,8 @@ const Input = ({ type, name, id, active, value, ...props }) => {
 
   return (
     <>
-      <label htmlFor={id} className={labelClass}>
-        {!active && value}
-      </label>
+      <label htmlFor={id} className={labelClass} />
+      <span>{!active && value}</span>
       <input
         type={type}
         id={id}

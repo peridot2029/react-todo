@@ -20,33 +20,24 @@
   }
 
   &.input-edit {
-    width: calc(100% - 140px);
-    height: 33px;
-    line-height: 33px;
+    width: calc(100% - 160px);
+    height: 35px;
+    line-height: 35px;
+    margin-left: 10px;
     border: 1px solid #beb9b9;
   }
 
   &.input-checkbox {
-    display: inherit;
-    order: -1;
-    width: 20px;
-    height: 20px;
-    margin: 8px 10px 0 0;
-    border-radius: 3px;
+    width: 0;
+    padding: 0;
   }
 }
 
 .label {
-  display: inherit;
-  width: calc(100% - 140px);
-  height: 37px;
-  line-height: 37px;
-  min-height: 37px;
-  font-size: 24px;
-  text-transform: capitalize;
 
 
-  &.a11y-hidden {
+
+  &.label-add {
     overflow: hidden;
     position: absolute;
     width: 1px;
@@ -54,5 +45,63 @@
     margin: -1px;
     clip: rect(0 0 0 0);
     clip: rect(0, 0, 0, 0);
+
+    +span {
+      display: none;
+    }
+
+  }
+
+  &.label-edit {
+    overflow: hidden;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    clip: rect(0 0 0 0);
+    clip: rect(0, 0, 0, 0);
+
+    +span {
+      display: none;
+    }
+  }
+
+  &.label-checkbox+span {
+    width: calc(100% - 145px);
+    height: 33x;
+    line-height: 33px;
+    margin-left: 10px;
+    font-size: 24px;
+    text-transform: capitalize;
+  }
+
+  &.label-checkbox.a11y-hidden+span {
+    overflow: hidden;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    clip: rect(0 0 0 0);
+    clip: rect(0, 0, 0, 0);
+  }
+
+  &.label-checkbox {
+    content: "";
+    width: 25px;
+    height: 25px;
+    background: url("../../assets/icons/icon-check.svg");
+    background-size: cover;
+  }
+
+  &.label-checkbox:active {
+    content: "";
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    background: url("../../assets/icons/icon-no-check.svg");
+    background-size: cover;
+    margin-right: 10px;
+    cursor: pointer;
+
   }
 }

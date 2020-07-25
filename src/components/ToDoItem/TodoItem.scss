@@ -12,6 +12,13 @@
     }
   }
 
-  .completed .todo-btngroup .delete-button {
-    padding: 0 0 0 65px;
+  .completed {
+    .label {
+      text-decoration: line-through;
+      color: #888;
+    }
+
+    .todo-btngroup .delete-button {
+      padding: 0 0 0 65px;
+    }
   }
