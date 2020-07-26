@@ -1,5 +1,15 @@
-.add-form>div {
-  display: flex;
-  margin-top: 10px;
+.add-form {
+  &__input-wrapper {
+    display: flex;
+    margin-top: 10px;
+  }
 
+  .input--add {
+    // width: calc(100% - 50px);
+    border-color: #726b6b;
+  }
+
+  .input--add:focus {
+    outline: 0;
+  }
 }

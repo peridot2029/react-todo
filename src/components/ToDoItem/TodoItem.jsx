@@ -1,15 +1,20 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import TodoListContext from "../TodoListContext/TodoList.context";
 import Input from "../Input/Input";
 import Button from "../Button/Button";
+import Checkbox from "../Checkbox/Checkbox";
 import "./TodoItem.scss";
 
-const TodoItem = ({ date }) => {
+const TodoItem = ({ date, isCompleted }) => {
   let index, list, item, result;
 
   const [todoList, setTodoList] = useContext(TodoListContext);
 
   const [active, setActive] = useState(false);
+
+  const [isChecked, setIsChecked] = useState(false);
+
+  console.log("item", isCompleted);
 
   const itemMatchingID = (item) => {
     return item.id === date.id;
@@ -54,24 +59,35 @@ const TodoItem = ({ date }) => {
     setTodoList(list);
   };
 
-  const handleCheckboxClick = () => {
-    item = todoList.filter(incompleteItem);
-    result = item.map(changeItemToCompleted);
-    index = todoList.findIndex(itemMatchingID);
-    list = [...todoList];
-    list.splice(index, result);
-    setTodoList(list);
+  // const handleCheckboxClick = () => {
+  //   item = todoList.filter(incompleteItem);
+  //   result = item.map(changeItemToCompleted);
+  //   index = todoList.findIndex(itemMatchingID);
+  //   list = [...todoList];
+  //   list.splice(index, result);
+  //   setTodoList(list);
+  // };
+
+  const handleCheckboxChange = (checked) => {
+    setIsChecked(true);
   };
 
+  useEffect(() => {
+    const item = todoList.find((item) => item.id === date.id);
+    const index = todoList.findIndex((item) => item.id === date.id);
+    const list = [...todoList];
+    if (isChecked && !item.isCompleted) {
+      item.created = new Date();
+      item.isCompleted = true;
+      list.splice(index, item);
+      setTodoList(list);
+    } else {
+      console.log("list 2");
+    }
+  }, [isChecked]);
   return (
     <li>
-      <Input
-        type="checkbox"
-        id={date.id}
-        value={date.content}
-        active={active}
-        onClick={handleCheckboxClick}
-      />
+      <Checkbox type="checkbox" id={date.id} onChange={handleCheckboxChange} />
 
       {active && (
         <Input
@@ -83,16 +99,16 @@ const TodoItem = ({ date }) => {
         />
       )}
       <div className="todo-btngroup">
-        {!active && (
-          <Button
-            type="button"
-            name="edit"
-            active={active}
-            onClick={handleEditClick}
-          />
-        )}
-        {active && (
-          <Button type="submit" name="save" onClick={handleSaveClick} />
+        {!isCompleted && (
+          <>
+            <Button
+              type="button"
+              name="edit"
+              active={active}
+              onClick={handleEditClick}
+            />
+            <Button type="submit" name="save" onClick={handleSaveClick} />
+          </>
         )}
 
         <Button type="button" name="delete" onClick={handleDeleteClick} />

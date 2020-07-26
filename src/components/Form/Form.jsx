@@ -15,6 +15,7 @@ const Form = ({ addTodoDate }) => {
       setError(true);
     } else {
       addTodoDate(value);
+
       setError(false);
       setValue("");
     }
@@ -26,7 +27,7 @@ const Form = ({ addTodoDate }) => {
 
   return (
     <form className="add-form" onSubmit={handleSubmit}>
-      <div>
+      <div className="add-form__input-wrapper">
         <Input type="text" name="add" value={value} onChange={handleChange} />
         <Button type="submit" name="add" />
       </div>

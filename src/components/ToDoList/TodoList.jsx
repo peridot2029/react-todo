@@ -3,9 +3,9 @@ import uuid from "uuid/dist/v1";
 import TodoListContext from "../TodoListContext/TodoList.context";
 import Form from "../Form/Form";
 import TodoItem from "../TodoItem/TodoItem";
-import CompletedItem from "../TodoItem/CompletedItem";
 import "./TodoList.scss";
 
+// isCompleted 값에 따라서 completed
 const TodoList = () => {
   const loadTodoList = JSON.parse(localStorage.getItem("TODO")) || [];
 
@@ -27,6 +27,7 @@ const TodoList = () => {
     return dateA["created"] < dateB["created"] ? 1 : -1;
   };
   todoList.sort(todoCreatedSort);
+
   useEffect(() => {
     localStorage.setItem("TODO", JSON.stringify(todoList));
   }, [todoList]);
@@ -46,7 +47,13 @@ const TodoList = () => {
             <ul className="incomplete">
               {todoList.map(
                 (date) =>
-                  !date.isCompleted && <TodoItem key={date.id} date={date} />
+                  !date.isCompleted && (
+                    <TodoItem
+                      key={date.id}
+                      date={date}
+                      isCompleted={date.isCompleted}
+                    />
+                  )
               )}
             </ul>
           </div>
@@ -57,7 +64,11 @@ const TodoList = () => {
               {todoList.map(
                 (date) =>
                   date.isCompleted && (
-                    <CompletedItem key={date.id} date={date} />
+                    <TodoItem
+                      key={date.id}
+                      date={date}
+                      isCompleted={date.isCompleted}
+                    />
                   )
               )}
             </ul>
