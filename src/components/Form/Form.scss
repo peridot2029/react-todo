@@ -1,15 +1,27 @@
 .add-form {
+
   &__input-wrapper {
     display: flex;
     margin-top: 10px;
   }
 
+  .label--add {
+    width: calc(100% - 55px);
+  }
+
   .input--add {
-    // width: calc(100% - 50px);
+    width: 100%;
     border-color: #726b6b;
   }
 
   .input--add:focus {
     outline: 0;
   }
+
+  .button--add {
+    align-items: flex-end;
+    padding: 0 0 0 20px;
+  }
+
+
 }

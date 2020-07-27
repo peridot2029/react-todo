@@ -6,7 +6,6 @@ const Checkbox = ({ type, id, ...props }) => {
   const [checked, setChecked] = useState(false);
 
   const checkboxClass = classNames("checkbox");
-  console.log(checkboxClass);
 
   const handleChange = (e) => {
     const { onChange } = props;

@@ -26,6 +26,7 @@ const TodoList = () => {
   const todoCreatedSort = (dateA, dateB) => {
     return dateA["created"] < dateB["created"] ? 1 : -1;
   };
+
   todoList.sort(todoCreatedSort);
 
   useEffect(() => {
@@ -37,14 +38,15 @@ const TodoList = () => {
       <main>
         <section>
           <h1>todo list</h1>
-          <div>
+
+          <div className="todo__add-item-wrapper">
             <h2>add item</h2>
             <Form addTodoDate={addTodoDate} />
           </div>
 
-          <div className="todo">
+          <div className="todo__incompleted-wrapper">
             <h2>todo</h2>
-            <ul className="incomplete">
+            <ul className="incompleted">
               {todoList.map(
                 (date) =>
                   !date.isCompleted && (
@@ -58,7 +60,7 @@ const TodoList = () => {
             </ul>
           </div>
 
-          <div className="todo">
+          <div className="todo__completed-wrapper">
             <h2>completed</h2>
             <ul className="completed">
               {todoList.map(

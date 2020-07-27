@@ -1,24 +1,67 @@
   .todo {
-    li {
-      display: flex;
-      height: 40px;
-      line-height: 40px;
-      margin: 10px 0;
-      border-bottom: 1px solid #595959;
+
+    &__incompleted-wrapper,
+    &__completed-wrapper {
+      li {
+        display: flex;
+        height: 40px;
+        line-height: 40px;
+        margin: 10px 0;
+        border-bottom: 1px solid #595959;
+      }
+
+      .label__is-readonly {
+        width: calc(100% - 135px);
+        margin-left: 10px;
+      }
+
+      .input__is-readonly {
+        width: 100%;
+        height: 35px;
+        line-height: 35px;
+        border-style: none;
+      }
+
+      .input__is-readonly:focus {
+        outline: 0;
+      }
+
+      .label--edit {
+        width: calc(100% - 135px);
+        margin-left: 10px;
+      }
+
+      .input--edit {
+        width: 100%;
+        height: 35px;
+        line-height: 35px;
+        border-color: #beb9b9;
+      }
+
+      .input--edit:focus {
+        outline: 0;
+      }
+
+      .button--save {
+        align-items: flex-end;
+      }
+
     }
 
-    .incomplete .todo-btngroup .delete-button {
-      margin: 0 0 0 8px;
-    }
   }
 
-  .completed {
-    .label {
-      text-decoration: line-through;
-      color: #888;
-    }
+  // .completed {
+  //   .label {
+  //     text-decoration: line-through;
+  //     color: #888;
+  //   }
 
-    .todo-btngroup .delete-button {
-      padding: 0 0 0 65px;
-    }
-  }
+  //   .todo-btngroup .delete-button {
+  //     padding: 0 0 0 65px;
+  //   }
+  // }
+
+
+  // .incomplete .todo-btngroup .delete-button {
+  //   margin: 0 0 0 8px;
+  //}

@@ -14,8 +14,6 @@ const TodoItem = ({ date, isCompleted }) => {
 
   const [isChecked, setIsChecked] = useState(false);
 
-  console.log("item", isCompleted);
-
   const itemMatchingID = (item) => {
     return item.id === date.id;
   };
@@ -82,33 +80,36 @@ const TodoItem = ({ date, isCompleted }) => {
       list.splice(index, item);
       setTodoList(list);
     } else {
-      console.log("list 2");
     }
   }, [isChecked]);
   return (
     <li>
       <Checkbox type="checkbox" id={date.id} onChange={handleCheckboxChange} />
 
-      {active && (
+      {!isCompleted && (
         <Input
           type="text"
           id={date.id}
           value={date.content}
-          name="edit"
+          name={active ? "edit" : active}
+          active={active}
           onChange={todoEditItem}
         />
       )}
+
+      {/* !isCompleted && !active -> edit 표시 */}
+      {/* isCompleted -> text 표시 */}
       <div className="todo-btngroup">
-        {!isCompleted && (
-          <>
-            <Button
-              type="button"
-              name="edit"
-              active={active}
-              onClick={handleEditClick}
-            />
-            <Button type="submit" name="save" onClick={handleSaveClick} />
-          </>
+        {!isCompleted === !active && (
+          <Button
+            type="button"
+            name="edit"
+            active={active}
+            onClick={handleEditClick}
+          />
+        )}
+        {active && (
+          <Button type="submit" name="save" onClick={handleSaveClick} />
         )}
 
         <Button type="button" name="delete" onClick={handleDeleteClick} />

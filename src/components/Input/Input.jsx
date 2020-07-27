@@ -7,14 +7,18 @@ import "./Input.scss";
 // 2. type 주로 사용되는 type 지정하기
 // 3. label 필요할때만 받아서 사용하기
 
-const Input = ({ type = "text", name, id, active, value, ...props }) => {
-  const inputClass = classNames("input", name && `input--${name}`);
+const Input = ({ type = "text", name, id, active, label, value, ...props }) => {
+  const inputClass = classNames("input", name && `input--${name}`, {
+    "input__is-readonly": !active && value,
+  });
 
   const labelClass = classNames(
     "label",
     name && `label--${name}`,
+    { "label__is-readonly": !active && value },
     active && "a11y-hidden"
   );
+  console.log("active", active);
 
   const handleChange = (e) => {
     const { onChange } = props;
@@ -27,7 +31,7 @@ const Input = ({ type = "text", name, id, active, value, ...props }) => {
   return (
     <>
       <label htmlFor={id} className={labelClass}>
-        <span>{!active && value}</span>
+        {/* {label && <span className="input__label"></span>} */}
         <input
           type={type}
           id={id}
@@ -43,7 +47,6 @@ const Input = ({ type = "text", name, id, active, value, ...props }) => {
 Input.propTypes = {
   type: string.isRequired,
   onChange: func,
-  onClick: func,
 };
 
 export default Input;

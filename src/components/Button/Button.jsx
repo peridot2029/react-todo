@@ -6,7 +6,7 @@ import "./Button.scss";
 const Button = ({ type, name, children, onClick }) => {
   const [isClicked, setClicked] = useState(false);
 
-  const buttonClass = classNames("button", name && `${name}-button`);
+  const buttonClass = classNames("button", name && `button--${name}`);
 
   const handleClick = () => {
     setClicked(true);
