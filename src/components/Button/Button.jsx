@@ -3,7 +3,7 @@ import PropTypes, { element, string, func } from "prop-types";
 import classNames from "classnames";
 import "./Button.scss";
 
-const Button = ({ type, name, children, onClick }) => {
+const Button = ({ type = "button", name, children, onClick }) => {
   const [isClicked, setClicked] = useState(false);
 
   const buttonClass = classNames("button", name && `button--${name}`);

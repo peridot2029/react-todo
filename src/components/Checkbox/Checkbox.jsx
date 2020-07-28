@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import classNames from "classnames";
 import "./Checkbox.scss";
 
-const Checkbox = ({ type, id, ...props }) => {
-  const [checked, setChecked] = useState(false);
+const Checkbox = ({ type = "checkbox", value, id, ...props }) => {
+  const [checked, setChecked] = useState(value || false);
 
   const checkboxClass = classNames("checkbox");
+  console.log(checkboxClass);
 
   const handleChange = (e) => {
     const { onChange } = props;
@@ -29,6 +30,7 @@ const Checkbox = ({ type, id, ...props }) => {
         type={type}
         className={checkboxClass}
         checked={checked}
+        value={value}
         onChange={handleChange}
       />
     </label>

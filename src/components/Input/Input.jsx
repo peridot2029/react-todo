@@ -1,25 +1,22 @@
 import React from "react";
-import { func, string } from "prop-types";
+import { func, string, bool } from "prop-types";
 import classNames from "classnames";
 import "./Input.scss";
 
-// 1. includes 함수 대신 비교 사용하기
-// 2. type 주로 사용되는 type 지정하기
-// 3. label 필요할때만 받아서 사용하기
-
-const Input = ({ type = "text", name, id, active, label, value, ...props }) => {
-  const inputClass = classNames("input", name && `input--${name}`, {
-    "input__is-readonly": !active && value,
-  });
+const Input = ({ type = "text", label, name, id, active, value, ...props }) => {
+  const inputClass = classNames(
+    "input",
+    name === "add" && `input--${name}`,
+    { "input__is-readonly": !active && id },
+    { "input--edit": active && id }
+  );
 
   const labelClass = classNames(
     "label",
-    name && `label--${name}`,
-    { "label__is-readonly": !active && value },
-    active && "a11y-hidden"
+    name === "add" && `label--${name}`,
+    { "label__is-readonly": !active && id },
+    { "label--edit": active && id }
   );
-  console.log("active", active);
-
   const handleChange = (e) => {
     const { onChange } = props;
 
@@ -27,11 +24,13 @@ const Input = ({ type = "text", name, id, active, label, value, ...props }) => {
       onChange(e.target.value);
     }
   };
+  console.log(active);
 
   return (
     <>
       <label htmlFor={id} className={labelClass}>
-        {/* {label && <span className="input__label"></span>} */}
+        {!label && <span className="label__input">{value}</span>}
+
         <input
           type={type}
           id={id}
@@ -45,7 +44,10 @@ const Input = ({ type = "text", name, id, active, label, value, ...props }) => {
 };
 
 Input.propTypes = {
-  type: string.isRequired,
+  type: string,
+  id: string,
+  active: bool,
+  value: string,
   onChange: func,
 };
 

@@ -5,8 +5,8 @@ import Button from "../Button/Button";
 import Checkbox from "../Checkbox/Checkbox";
 import "./TodoItem.scss";
 
-const TodoItem = ({ date, isCompleted }) => {
-  let index, list, item, result;
+const TodoItem = ({ item, isCompleted }) => {
+  let index, list, todo, result;
 
   const [todoList, setTodoList] = useContext(TodoListContext);
 
@@ -14,32 +14,35 @@ const TodoItem = ({ date, isCompleted }) => {
 
   const [isChecked, setIsChecked] = useState(false);
 
-  const itemMatchingID = (item) => {
-    return item.id === date.id;
+  const [isLabel, setIsLabel] = useState(false);
+
+  const itemMatchingID = (todo) => {
+    return todo.id === item.id;
   };
 
-  const incompleteItem = (item) => {
-    return item.id === date.id && !item.isCompleted;
+  const incompleteItem = (todo) => {
+    return todo.id === item.id && !todo.isCompleted;
   };
 
-  const changeItemToCompleted = (date) => {
-    date.isCompleted = !date.isCompleted;
-    date.created = new Date();
-    return date;
-  };
+  // const changeItemToCompleted = (item) => {
+  //   item.isCompleted = !item.isCompleted;
+  //   item.created = new Date();
+  //   return item;
+  // };
 
-  const changeItemContent = (value, date) => {
-    date.content = value;
-    return date;
+  const changeItemContent = (value, todo) => {
+    todo.content = value;
+    return todo;
   };
 
   const handleEditClick = () => {
     setActive(true);
+    setIsLabel(true);
   };
 
   const todoEditItem = (value) => {
-    item = todoList.filter(incompleteItem);
-    result = item.map(changeItemContent.bind(date, value));
+    todo = todoList.filter(incompleteItem);
+    result = todo.map(changeItemContent.bind(todo, value));
     index = todoList.findIndex(itemMatchingID);
     list = [...todoList];
     list.splice(index, result);
@@ -48,6 +51,7 @@ const TodoItem = ({ date, isCompleted }) => {
 
   const handleSaveClick = () => {
     setActive(false);
+    setIsLabel(false);
   };
 
   const handleDeleteClick = () => {
@@ -57,50 +61,66 @@ const TodoItem = ({ date, isCompleted }) => {
     setTodoList(list);
   };
 
-  // const handleCheckboxClick = () => {
-  //   item = todoList.filter(incompleteItem);
-  //   result = item.map(changeItemToCompleted);
-  //   index = todoList.findIndex(itemMatchingID);
-  //   list = [...todoList];
-  //   list.splice(index, result);
-  //   setTodoList(list);
-  // };
-
   const handleCheckboxChange = (checked) => {
     setIsChecked(true);
+    setIsLabel(false);
   };
 
   useEffect(() => {
-    const item = todoList.find((item) => item.id === date.id);
-    const index = todoList.findIndex((item) => item.id === date.id);
+    const todo_item = todoList.find((todo) => todo.id === item.id);
+    const index = todoList.findIndex((todo) => todo.id === item.id);
     const list = [...todoList];
-    if (isChecked && !item.isCompleted) {
+
+    if (isChecked && !todo_item.isCompleted) {
       item.created = new Date();
       item.isCompleted = true;
       list.splice(index, item);
       setTodoList(list);
-    } else {
+      setIsChecked(false);
+    } else if (isChecked && todo_item.isCompleted) {
+      item.created = new Date();
+      item.isCompleted = false;
+      list.slice(index, item);
+      setTodoList(list);
+      setIsChecked(true);
     }
   }, [isChecked]);
+
   return (
     <li>
-      <Checkbox type="checkbox" id={date.id} onChange={handleCheckboxChange} />
+      <Checkbox
+        type="checkbox"
+        id={item.id}
+        value={item.isCompleted}
+        onChange={handleCheckboxChange}
+      />
 
-      {!isCompleted && (
+      {!active && (
         <Input
           type="text"
-          id={date.id}
-          value={date.content}
-          name={active ? "edit" : active}
+          label={isLabel}
+          id={item.id}
+          value={item.content}
           active={active}
-          onChange={todoEditItem}
         />
       )}
 
-      {/* !isCompleted && !active -> edit 표시 */}
-      {/* isCompleted -> text 표시 */}
+      {active && (
+        <>
+          <Input
+            type="text"
+            name="edit"
+            label={isLabel}
+            id={item.id}
+            value={item.content}
+            active={active}
+            onChange={todoEditItem}
+          />
+        </>
+      )}
+
       <div className="todo-btngroup">
-        {!isCompleted === !active && (
+        {!active === !isCompleted && (
           <Button
             type="button"
             name="edit"

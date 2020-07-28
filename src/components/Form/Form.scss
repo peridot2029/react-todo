@@ -1,16 +1,16 @@
 .add-form {
 
   &__input-wrapper {
-    display: flex;
+    // display: flex;
     margin-top: 10px;
   }
 
-  .label--add {
-    width: calc(100% - 55px);
+  .label__input {
+    display: none;
   }
 
   .input--add {
-    width: 100%;
+    width: calc(100% - 55px);
     border-color: #726b6b;
   }
 

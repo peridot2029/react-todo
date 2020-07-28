@@ -48,12 +48,12 @@ const TodoList = () => {
             <h2>todo</h2>
             <ul className="incompleted">
               {todoList.map(
-                (date) =>
-                  !date.isCompleted && (
+                (item) =>
+                  !item.isCompleted && (
                     <TodoItem
-                      key={date.id}
-                      date={date}
-                      isCompleted={date.isCompleted}
+                      key={item.id}
+                      item={item}
+                      isCompleted={item.isCompleted}
                     />
                   )
               )}
@@ -64,12 +64,12 @@ const TodoList = () => {
             <h2>completed</h2>
             <ul className="completed">
               {todoList.map(
-                (date) =>
-                  date.isCompleted && (
+                (item) =>
+                  item.isCompleted && (
                     <TodoItem
-                      key={date.id}
-                      date={date}
-                      isCompleted={date.isCompleted}
+                      key={item.id}
+                      item={item}
+                      isCompleted={item.isCompleted}
                     />
                   )
               )}
