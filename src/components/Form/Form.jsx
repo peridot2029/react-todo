@@ -26,8 +26,8 @@ const Form = ({ addTodoDate }) => {
   };
 
   return (
-    <form className="add-form" onSubmit={handleSubmit}>
-      <div className="add-form__input-wrapper">
+    <form className="form-add" onSubmit={handleSubmit}>
+      <div className="form-add__input-wrapper">
         <Input type="text" name="add" value={value} onChange={handleChange} />
         <Button type="submit" name="add" />
         <Error name={error} />

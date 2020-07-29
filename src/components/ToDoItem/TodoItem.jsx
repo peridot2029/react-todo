@@ -56,14 +56,19 @@ const TodoItem = ({ item, isCompleted }) => {
       todo_item.created = new Date();
       todo_item.isCompleted = true;
       list.splice(index, todo_item);
-      setTodoList(list);
-      setIsChecked(false);
+      window.setTimeout(() => {
+        setTodoList(list);
+        setIsChecked(false);
+      }, 300);
     } else if (isChecked && isCompleted) {
       todo_item.created = new Date();
       todo_item.isCompleted = false;
       list.slice(index, todo_item);
-      setTodoList(list);
-      setIsChecked(true);
+
+      window.setTimeout(() => {
+        setTodoList(list);
+        setIsChecked(true);
+      }, 300);
     }
   }, [isChecked, isCompleted, todoList, setTodoList, item.id]);
 

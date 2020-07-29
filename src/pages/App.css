@@ -62,3 +62,8 @@ h3 {
   line-height: 1.5;
   color: #595959;
 }
+
+body {
+  overflow: scroll;
+  background: #003666;
+}
