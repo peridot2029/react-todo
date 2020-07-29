@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { func, string, bool } from "prop-types";
 import classNames from "classnames";
 import "./Checkbox.scss";
 
@@ -6,7 +7,6 @@ const Checkbox = ({ type = "checkbox", value, id, ...props }) => {
   const [checked, setChecked] = useState(value || false);
 
   const checkboxClass = classNames("checkbox");
-  console.log(checkboxClass);
 
   const handleChange = (e) => {
     const { onChange } = props;
@@ -25,15 +25,23 @@ const Checkbox = ({ type = "checkbox", value, id, ...props }) => {
   }, [checked]);
 
   return (
-    <label htmlFor={id}>
-      <input
-        type={type}
-        className={checkboxClass}
-        checked={checked}
-        value={value}
-        onChange={handleChange}
-      />
-    </label>
+    <>
+      <label htmlFor={id}>
+        <input
+          type={type}
+          className={checkboxClass}
+          checked={checked}
+          value={value}
+          onChange={handleChange}
+        />
+      </label>
+    </>
   );
+};
+Checkbox.propTypes = {
+  type: string,
+  id: string,
+  value: bool.isRequired,
+  onChange: func,
 };
 export default Checkbox;

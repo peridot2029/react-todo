@@ -1,7 +1,6 @@
 .add-form {
 
   &__input-wrapper {
-    // display: flex;
     margin-top: 10px;
   }
 
@@ -23,5 +22,9 @@
     padding: 0 0 0 20px;
   }
 
+  .is-error::before {
+    content: "Please enter the contents";
+    margin-top: -6px;
+  }
 
 }

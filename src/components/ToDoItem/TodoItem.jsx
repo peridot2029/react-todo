@@ -6,8 +6,6 @@ import Checkbox from "../Checkbox/Checkbox";
 import "./TodoItem.scss";
 
 const TodoItem = ({ item, isCompleted }) => {
-  let index, list, todo, result;
-
   const [todoList, setTodoList] = useContext(TodoListContext);
 
   const [active, setActive] = useState(false);
@@ -16,23 +14,11 @@ const TodoItem = ({ item, isCompleted }) => {
 
   const [isLabel, setIsLabel] = useState(false);
 
-  const itemMatchingID = (todo) => {
-    return todo.id === item.id;
-  };
-
-  const incompleteItem = (todo) => {
-    return todo.id === item.id && !todo.isCompleted;
-  };
-
-  // const changeItemToCompleted = (item) => {
-  //   item.isCompleted = !item.isCompleted;
-  //   item.created = new Date();
-  //   return item;
-  // };
-
-  const changeItemContent = (value, todo) => {
-    todo.content = value;
-    return todo;
+  const handleDeleteClick = () => {
+    const index = todoList.findIndex((todo) => todo.id === item.id);
+    const list = [...todoList];
+    list.splice(index, 1);
+    setTodoList(list);
   };
 
   const handleEditClick = () => {
@@ -40,25 +26,9 @@ const TodoItem = ({ item, isCompleted }) => {
     setIsLabel(true);
   };
 
-  const todoEditItem = (value) => {
-    todo = todoList.filter(incompleteItem);
-    result = todo.map(changeItemContent.bind(todo, value));
-    index = todoList.findIndex(itemMatchingID);
-    list = [...todoList];
-    list.splice(index, result);
-    setTodoList(list);
-  };
-
   const handleSaveClick = () => {
     setActive(false);
     setIsLabel(false);
-  };
-
-  const handleDeleteClick = () => {
-    index = todoList.findIndex(itemMatchingID);
-    list = [...todoList];
-    list.splice(index, 1);
-    setTodoList(list);
   };
 
   const handleCheckboxChange = (checked) => {
@@ -66,25 +36,36 @@ const TodoItem = ({ item, isCompleted }) => {
     setIsLabel(false);
   };
 
+  const todoEditItem = (value) => {
+    const todo = todoList.find((todo) => todo.id === item.id && !isCompleted);
+    todo.content = value;
+    const index = todoList.findIndex(
+      (todo) => todo.id === item.id && !isCompleted
+    );
+    const list = [...todoList];
+    list.splice(index, todo);
+    setTodoList(list);
+  };
+
   useEffect(() => {
     const todo_item = todoList.find((todo) => todo.id === item.id);
     const index = todoList.findIndex((todo) => todo.id === item.id);
     const list = [...todoList];
 
-    if (isChecked && !todo_item.isCompleted) {
-      item.created = new Date();
-      item.isCompleted = true;
-      list.splice(index, item);
+    if (isChecked && !isCompleted) {
+      todo_item.created = new Date();
+      todo_item.isCompleted = true;
+      list.splice(index, todo_item);
       setTodoList(list);
       setIsChecked(false);
-    } else if (isChecked && todo_item.isCompleted) {
-      item.created = new Date();
-      item.isCompleted = false;
-      list.slice(index, item);
+    } else if (isChecked && isCompleted) {
+      todo_item.created = new Date();
+      todo_item.isCompleted = false;
+      list.slice(index, todo_item);
       setTodoList(list);
       setIsChecked(true);
     }
-  }, [isChecked]);
+  }, [isChecked, isCompleted, todoList, setTodoList, item.id]);
 
   return (
     <li>
@@ -96,13 +77,15 @@ const TodoItem = ({ item, isCompleted }) => {
       />
 
       {!active && (
-        <Input
-          type="text"
-          label={isLabel}
-          id={item.id}
-          value={item.content}
-          active={active}
-        />
+        <>
+          <Input
+            type="text"
+            label={isLabel}
+            id={item.id}
+            value={item.content}
+            active={active}
+          />
+        </>
       )}
 
       {active && (

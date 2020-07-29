@@ -5,7 +5,6 @@ import Form from "../Form/Form";
 import TodoItem from "../TodoItem/TodoItem";
 import "./TodoList.scss";
 
-// isCompleted 값에 따라서 completed
 const TodoList = () => {
   const loadTodoList = JSON.parse(localStorage.getItem("TODO")) || [];
 
@@ -35,8 +34,8 @@ const TodoList = () => {
 
   return (
     <TodoListContext.Provider value={[todoList, setTodoList]}>
-      <main>
-        <section>
+      <main className="todo__main-wrapper">
+        <section className="todo__section-wrapper">
           <h1>todo list</h1>
 
           <div className="todo__add-item-wrapper">

@@ -17,6 +17,7 @@ const Input = ({ type = "text", label, name, id, active, value, ...props }) => {
     { "label__is-readonly": !active && id },
     { "label--edit": active && id }
   );
+
   const handleChange = (e) => {
     const { onChange } = props;
 
@@ -24,13 +25,11 @@ const Input = ({ type = "text", label, name, id, active, value, ...props }) => {
       onChange(e.target.value);
     }
   };
-  console.log(active);
 
   return (
     <>
       <label htmlFor={id} className={labelClass}>
         {!label && <span className="label__input">{value}</span>}
-
         <input
           type={type}
           id={id}
@@ -45,9 +44,11 @@ const Input = ({ type = "text", label, name, id, active, value, ...props }) => {
 
 Input.propTypes = {
   type: string,
+  name: string,
   id: string,
+  label: bool,
   active: bool,
-  value: string,
+  value: string.isRequired,
   onChange: func,
 };
 

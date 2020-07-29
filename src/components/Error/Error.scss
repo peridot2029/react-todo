@@ -1,10 +1,6 @@
 @charset "utf-8";
 
 .error {
-  &.is-error::before {
-    content: "Please enter the contents";
-    font-size: 22px;
-    margin-top: -6px;
-    color: red;
-  }
+  color: red;
+  font-size: 24px;
 }

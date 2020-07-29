@@ -1,20 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes, { element, string, func } from "prop-types";
 import classNames from "classnames";
 import "./Button.scss";
 
 const Button = ({ type = "button", name, children, onClick }) => {
-  const [isClicked, setClicked] = useState(false);
+  const [clicked, setClicked] = useState(false);
 
   const buttonClass = classNames("button", name && `button--${name}`);
 
   const handleClick = () => {
-    setClicked(true);
+    setClicked(!clicked);
 
     if (onClick) {
-      onClick(isClicked);
+      onClick(clicked);
     }
   };
+
+  useEffect(() => {
+    if (clicked) {
+      setClicked(true);
+    }
+  }, [clicked]);
 
   return (
     <button type={type} className={buttonClass} onClick={handleClick}>
