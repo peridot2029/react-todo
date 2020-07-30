@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import uuid from "uuid/dist/v1";
-import TodoListContext from "../TodoListContext/TodoList.context";
-import Form from "../Form/Form";
-import TodoItem from "../TodoItem/TodoItem";
-import "./TodoList.scss";
+import React, { useState, useEffect } from 'react';
+import uuid from 'uuid/dist/v1';
+import TodoListContext from '../TodoListContext/TodoList.context';
+import Form from '../Form/Form';
+import TodoItem from '../TodoItem/TodoItem';
+import './TodoList.scss';
 
 const TodoList = () => {
-  const loadTodoList = JSON.parse(localStorage.getItem("TODO")) || [];
+  const loadTodoList = JSON.parse(localStorage.getItem('TODO')) || [];
 
   const [todoList, setTodoList] = useState(loadTodoList);
 
@@ -23,29 +23,29 @@ const TodoList = () => {
   };
 
   const todoCreatedSort = (dateA, dateB) => {
-    return dateA["created"] < dateB["created"] ? 1 : -1;
+    return dateA['created'] < dateB['created'] ? 1 : -1;
   };
 
   todoList.sort(todoCreatedSort);
 
   useEffect(() => {
-    localStorage.setItem("TODO", JSON.stringify(todoList));
+    localStorage.setItem('TODO', JSON.stringify(todoList));
   }, [todoList]);
 
   return (
     <TodoListContext.Provider value={[todoList, setTodoList]}>
-      <main className="todo__main-wrapper">
-        <section className="todo__section-wrapper">
+      <main className='todo__main-wrapper'>
+        <section className='todo__section-wrapper'>
           <h1>todo list</h1>
 
-          <div className="todo__add-item-wrapper">
+          <div className='todo__add-item-wrapper'>
             <h2>add item</h2>
             <Form addTodoDate={addTodoDate} />
           </div>
 
-          <div className="todo__incompleted-wrapper">
+          <div className='todo__incompleted-wrapper'>
             <h2>todo</h2>
-            <ul className="incompleted">
+            <ul className='incompleted'>
               {todoList.map(
                 (item) =>
                   !item.isCompleted && (
@@ -59,9 +59,9 @@ const TodoList = () => {
             </ul>
           </div>
 
-          <div className="todo__completed-wrapper">
+          <div className='todo__completed-wrapper'>
             <h2>completed</h2>
-            <ul className="completed">
+            <ul className='completed'>
               {todoList.map(
                 (item) =>
                   item.isCompleted && (

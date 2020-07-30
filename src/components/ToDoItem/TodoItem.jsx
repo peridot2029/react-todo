@@ -1,9 +1,9 @@
-import React, { useContext, useState, useEffect } from "react";
-import TodoListContext from "../TodoListContext/TodoList.context";
-import Input from "../Input/Input";
-import Button from "../Button/Button";
-import Checkbox from "../Checkbox/Checkbox";
-import "./TodoItem.scss";
+import React, { useContext, useState, useEffect } from 'react';
+import TodoListContext from '../TodoListContext/TodoList.context';
+import Input from '../Input/Input';
+import Button from '../Button/Button';
+import Checkbox from '../Checkbox/Checkbox';
+import './TodoItem.scss';
 
 const TodoItem = ({ item, isCompleted }) => {
   const [todoList, setTodoList] = useContext(TodoListContext);
@@ -75,7 +75,7 @@ const TodoItem = ({ item, isCompleted }) => {
   return (
     <li>
       <Checkbox
-        type="checkbox"
+        type='checkbox'
         id={item.id}
         value={item.isCompleted}
         onChange={handleCheckboxChange}
@@ -84,7 +84,7 @@ const TodoItem = ({ item, isCompleted }) => {
       {!active && (
         <>
           <Input
-            type="text"
+            type='text'
             label={isLabel}
             id={item.id}
             value={item.content}
@@ -96,8 +96,8 @@ const TodoItem = ({ item, isCompleted }) => {
       {active && (
         <>
           <Input
-            type="text"
-            name="edit"
+            type='text'
+            name='edit'
             label={isLabel}
             id={item.id}
             value={item.content}
@@ -107,20 +107,20 @@ const TodoItem = ({ item, isCompleted }) => {
         </>
       )}
 
-      <div className="todo-btngroup">
+      <div className='todo-btngroup'>
         {!active === !isCompleted && (
           <Button
-            type="button"
-            name="edit"
+            type='button'
+            name='edit'
             active={active}
             onClick={handleEditClick}
           />
         )}
         {active && (
-          <Button type="submit" name="save" onClick={handleSaveClick} />
+          <Button type='submit' name='save' onClick={handleSaveClick} />
         )}
 
-        <Button type="button" name="delete" onClick={handleDeleteClick} />
+        <Button type='button' name='delete' onClick={handleDeleteClick} />
       </div>
     </li>
   );

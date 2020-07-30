@@ -1,23 +1,23 @@
-import React, { useState } from "react";
-import Input from "./../Input/Input";
-import Button from "./../Button/Button";
-import Error from "./../Error/Error";
-import "./Form.scss";
+import React, { useState } from 'react';
+import Input from './../Input/Input';
+import Button from './../Button/Button';
+import Error from './../Error/Error';
+import './Form.scss';
 
 const Form = ({ addTodoDate }) => {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState('');
   const [error, setError] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (value === "") {
+    if (value === '') {
       setError(true);
     } else {
       addTodoDate(value);
 
       setError(false);
-      setValue("");
+      setValue('');
     }
   };
 
@@ -26,10 +26,10 @@ const Form = ({ addTodoDate }) => {
   };
 
   return (
-    <form className="form-add" onSubmit={handleSubmit}>
-      <div className="form-add__input-wrapper">
-        <Input type="text" name="add" value={value} onChange={handleChange} />
-        <Button type="submit" name="add" />
+    <form className='form-add' onSubmit={handleSubmit}>
+      <div className='form-add__input-wrapper'>
+        <Input type='text' name='add' value={value} onChange={handleChange} />
+        <Button type='submit' name='add' />
         <Error name={error} />
       </div>
     </form>

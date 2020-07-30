@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { func, string, bool } from "prop-types";
-import classNames from "classnames";
-import "./Checkbox.scss";
+import React, { useState, useEffect } from 'react';
+import { func, string, bool } from 'prop-types';
+import classNames from 'classnames';
+import './Checkbox.scss';
 
-const Checkbox = ({ type = "checkbox", value, id, ...props }) => {
+const Checkbox = ({ type = 'checkbox', value, id, ...props }) => {
   const [checked, setChecked] = useState(value || false);
 
-  const checkboxClass = classNames("checkbox");
+  const checkboxClass = classNames('checkbox');
 
   const handleChange = (e) => {
     const { onChange } = props;
