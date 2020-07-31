@@ -1,5 +1,4 @@
 .form-add {
-
   &__input-wrapper {
     margin-top: 10px;
   }
@@ -9,12 +8,13 @@
   }
 
   .input--add {
-    width: calc(100% - 55px);
-    border-color: #726b6b;
-  }
+    width: calc(100% - 60px);
+    padding-right: 0;
 
-  .input--add:focus {
-    outline: 0;
+    &:focus {
+      outline: 0;
+      box-shadow: 0 0 0 1px blue;
+    }
   }
 
   .button--add {
@@ -26,5 +26,4 @@
     content: "Please enter the contents";
     margin-top: -6px;
   }
-
 }

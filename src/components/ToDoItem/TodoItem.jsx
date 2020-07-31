@@ -12,10 +12,8 @@ const TodoItem = ({ item, isCompleted }) => {
 
   const [isChecked, setIsChecked] = useState(false);
 
-  const [isLabel, setIsLabel] = useState(false);
-
   const handleDeleteClick = () => {
-    const index = todoList.findIndex((todo) => todo.id === item.id);
+    const index = todoList.findIndex(todo => todo.id === item.id);
     const list = [...todoList];
     list.splice(index, 1);
     setTodoList(list);
@@ -23,54 +21,54 @@ const TodoItem = ({ item, isCompleted }) => {
 
   const handleEditClick = () => {
     setActive(true);
-    setIsLabel(true);
   };
 
   const handleSaveClick = () => {
     setActive(false);
-    setIsLabel(false);
   };
 
-  const handleCheckboxChange = (checked) => {
+  const handleCheckboxChange = () => {
     setIsChecked(true);
-    setIsLabel(false);
   };
 
-  const todoEditItem = (value) => {
-    const todo = todoList.find((todo) => todo.id === item.id && !isCompleted);
+  const todoEditItem = value => {
+    const todo = todoList.find(todo => todo.id === item.id && !isCompleted);
     todo.content = value;
     const index = todoList.findIndex(
-      (todo) => todo.id === item.id && !isCompleted
+      todo => todo.id === item.id && !isCompleted
     );
     const list = [...todoList];
     list.splice(index, todo);
     setTodoList(list);
   };
-
+  const checkedItemTimer = list => {
+    setTimeout(() => {
+      setTodoList(list);
+    }, 300);
+  };
   useEffect(() => {
-    const todo_item = todoList.find((todo) => todo.id === item.id);
-    const index = todoList.findIndex((todo) => todo.id === item.id);
+    if (!isChecked) {
+      return;
+    }
+
+    const todo_item = todoList.find(todo => todo.id === item.id);
+    const index = todoList.findIndex(todo => todo.id === item.id);
     const list = [...todoList];
+    todo_item.created = new Date();
+    list.splice(index, todo_item);
 
     if (isChecked && !isCompleted) {
-      todo_item.created = new Date();
       todo_item.isCompleted = true;
-      list.splice(index, todo_item);
-      window.setTimeout(() => {
-        setTodoList(list);
-        setIsChecked(false);
-      }, 300);
+      setIsChecked(false);
+      checkedItemTimer(list);
     } else if (isChecked && isCompleted) {
-      todo_item.created = new Date();
       todo_item.isCompleted = false;
-      list.slice(index, todo_item);
 
-      window.setTimeout(() => {
-        setTodoList(list);
-        setIsChecked(true);
-      }, 300);
+      setIsChecked(true);
+      checkedItemTimer(list);
     }
-  }, [isChecked, isCompleted, todoList, setTodoList, item.id]);
+    /* eslint-disable react-hooks/exhaustive-deps */
+  }, [isChecked, isCompleted]);
 
   return (
     <li>
@@ -85,7 +83,7 @@ const TodoItem = ({ item, isCompleted }) => {
         <>
           <Input
             type='text'
-            label={isLabel}
+            label={item.content}
             id={item.id}
             value={item.content}
             active={active}
@@ -98,7 +96,7 @@ const TodoItem = ({ item, isCompleted }) => {
           <Input
             type='text'
             name='edit'
-            label={isLabel}
+            label={item.content}
             id={item.id}
             value={item.content}
             active={active}

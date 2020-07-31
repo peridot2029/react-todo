@@ -1,107 +1,104 @@
-  .todo {
+.todo {
+  &__incompleted-wrapper {
+    li {
+      display: flex;
+      height: 40px;
+      line-height: 40px;
+      margin: 10px 0;
+      border-bottom: 1px solid #595959;
+    }
 
-    &__incompleted-wrapper {
-      li {
-        display: flex;
-        height: 40px;
-        line-height: 40px;
-        margin: 10px 0;
-        border-bottom: 1px solid #595959;
-      }
+    .label {
+      width: calc(100% - 135px);
+      margin-left: 10px;
 
-      .label {
-        &__is-readonly {
-          width: calc(100% - 135px);
-          margin-left: 10px;
-        }
-
-        &__input {
+      &__is-readonly {
+        .label__input {
           position: relative;
           top: -5px;
           width: 100%;
           font-size: 24px;
         }
-
-        &--edit {
-          width: calc(100% - 135px);
-          margin-left: 10px;
-
-          :focus {
-            outline: 0;
-          }
-        }
-
       }
 
-      .input {
-        &__is-readonly {
+      &--edit {
+        .label__input {
           display: none;
-
-        }
-
-        &--edit {
-          position: relative;
-          top: -5px;
-          width: 100%;
-          height: 35px;
-          line-height: 35px;
-          border-color: #beb9b9;
-        }
-      }
-
-      .todo-btngroup {
-        position: relative;
-        top: -5px;
-
-        &--save {
-          align-items: flex-end;
-        }
-
-        &--delete {
-          padding: 0 0 0 65px;
         }
       }
     }
 
-    &__completed-wrapper {
+    .input {
+      padding-right: 0;
 
-      li {
-        display: flex;
-        height: 40px;
-        line-height: 40px;
-        margin: 10px 0;
-        border-bottom: 1px solid #595959;
+      &__is-readonly {
+        display: none;
       }
 
-      .label {
-        &__is-readonly {
-          width: calc(100% - 85px);
-          margin-left: 10px;
-          text-decoration: line-through;
-          color: #888;
-
-          :focus {
-            outline: 0;
-          }
-        }
-
-        &__input {
-          position: relative;
-          top: -5px;
-          width: 100%;
-          font-size: 24px;
-        }
-      }
-
-      .input {
-        &__is-readonly {
-          display: none;
-        }
-      }
-
-      .todo-btngroup {
+      &--edit {
         position: relative;
         top: -5px;
+        height: 35px;
+        line-height: 35px;
+        padding-left: 0;
+        box-shadow: 0 0 0 1px #beb9b9;
+
+        &:focus {
+          outline: 0;
+          box-shadow: 0 0 0 1px blue;
+        }
+      }
+    }
+
+    .todo-btngroup {
+      position: relative;
+      top: -5px;
+      margin-left: 5px;
+
+      &--save {
+        align-items: flex-end;
+      }
+
+      &--delete {
+        padding: 0 0 0 65px;
       }
     }
   }
+
+  &__completed-wrapper {
+    li {
+      display: flex;
+      height: 40px;
+      line-height: 40px;
+      margin: 10px 0;
+      border-bottom: 1px solid #595959;
+    }
+
+    .label {
+      width: calc(100% - 85px);
+      margin-left: 10px;
+      text-decoration: line-through;
+      color: #888;
+
+      &__is-readonly {
+        .label__input {
+          position: relative;
+          top: -5px;
+          width: 100%;
+          font-size: 24px;
+        }
+      }
+    }
+
+    .input {
+      &__is-readonly {
+        display: none;
+      }
+    }
+
+    .todo-btngroup {
+      position: relative;
+      top: -5px;
+    }
+  }
+}
